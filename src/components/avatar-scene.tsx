@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+//import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 function PlaceholderMesh() {
   return (
@@ -86,7 +86,6 @@ export default function AvatarScene({
   clothingColor,
   onLoadingComplete,
 }: AvatarSceneProps) {
-  console.log(clothingColor);
   const [placeholderMessage, setPlaceholderMessage] = useState(
     "Upload an avatar to get started"
   );
