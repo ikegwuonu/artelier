@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧍‍♂️ Avatar Dressing Room (Next.js + Three.js)
 
-## Getting Started
+An interactive web app built with **Next.js**, **Three.js**, and **React Three Fiber** that allows users to visualize and customize a 3D avatar by selecting and applying wearable clothing in real time.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 👕 Load and display a customizable 3D avatar
+- 👗 Add, remove, and change clothing on the avatar
+- 🎨 Dynamic material and color control for clothing
+- 🌐 Optimized and responsive for desktop and mobile
+- ⚙️ Performance optimized using suspense and lazy loading
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** (Frontend Framework)
+- **React Three Fiber** (Three.js in React)
+- **Drei** (Helper components for 3D scenes)
+- **Three.js** (WebGL rendering)
+- **GLTFLoader** / `useGLTF` for model loading
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/ikegwuonu/artelier.git
+   cd artelier
+   ```
 
-## Deploy on Vercel
+2. **Install Dependencies**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+    npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+4. **Visit your app**
+   ```bash
+   Open http://localhost:3000 in your browser.
+   ```
+
+To use, first you the control panel on the right side to first upload your avatar model, then the clothing model. Accepted files are ".glb,.gltf". You can rotate You can use the color palette to select the colour of the clothing. You can also decide not to show the clothing or reset the scene
+
+This setup gives you full control:
+
+Zoom: scroll or pinch. if you are using a laptop trackpad, place two fingers on the trackpad and swipe up/down:
+
+Pan: right-click or two-finger drag
+
+Rotate: left-click and drag
+
+**Enjoy**

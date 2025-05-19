@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState, Suspense, useMemo } from "react";
+import { useEffect, useState, Suspense, useMemo, JSX } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-// Simple placeholder mesh when no model is loaded
 function PlaceholderMesh() {
   return (
     <mesh>
@@ -17,21 +16,26 @@ function PlaceholderMesh() {
   );
 }
 
-// Simplified model loader
-export function Model({
-  url,
-  color = "#fff",
-  visible = true,
-}: {
+type ModelProps = {
   url: string;
+  clothingUrl?: boolean;
   color?: string;
   visible?: boolean;
-}) {
+} & Partial<JSX.IntrinsicElements["primitive"]>;
+
+export function Model({
+  url,
+  clothingUrl,
+  color = "#fff",
+  visible = true,
+  ...props
+}: ModelProps) {
   const { scene } = useGLTF(url);
 
   const clonedScene = useMemo(() => scene.clone(), [scene]);
-
   useEffect(() => {
+    if (!clothingUrl) return;
+
     clonedScene.traverse((node) => {
       if ((node as THREE.Mesh).isMesh) {
         (node as THREE.Mesh).material = new THREE.MeshStandardMaterial({
@@ -39,11 +43,11 @@ export function Model({
         });
       }
     });
-  }, [color, clonedScene]);
+  }, [clothingUrl, color, clonedScene]);
 
-  return <primitive object={clonedScene} visible={visible} />;
+  return <primitive {...props} object={clonedScene} visible={visible} />;
 }
-// Loading indicator component
+
 function LoadingIndicator() {
   return (
     <Box
@@ -82,6 +86,7 @@ export default function AvatarScene({
   clothingColor,
   onLoadingComplete,
 }: AvatarSceneProps) {
+  console.log(clothingColor);
   const [placeholderMessage, setPlaceholderMessage] = useState(
     "Upload an avatar to get started"
   );
@@ -96,7 +101,6 @@ export default function AvatarScene({
       setIsLoading(false);
     }
 
-    // Simulate loading complete after a delay
     const timeout = setTimeout(() => {
       if (onLoadingComplete && (avatarUrl || clothingUrl)) {
         setIsLoading(false);
@@ -147,12 +151,15 @@ export default function AvatarScene({
         <Suspense fallback={null}>
           {avatarUrl ? (
             <group position={[0, 0, 0]}>
-              <Model url={avatarUrl} />
+              <Model url={avatarUrl} color="#1976d2" clothingUrl={false} />
               {clothingUrl && showClothing && (
                 <Model
+                  clothingUrl={true}
                   url={clothingUrl}
                   color={clothingColor}
                   visible={showClothing}
+                  scale={[1.5, 1.27, 1.8]}
+                  position={[-0.01, -0.063, 0.06]}
                 />
               )}
             </group>
